@@ -21,7 +21,7 @@ docker run -d -p 8000:8000 --name tabiptv maopashui/tabiptv:v1.0
 
 1.访问`http://ip:8000/login`，ip为本机ip地址，请自行查看，访问如图。
 
-<font color=red>首次需要`注册`用户，注册后则无法再新建用户了</font>，如果不注册的话，随意登录页面会提示报错。
+_首次需要`注册`用户，注册后则无法再新建用户了_，如果不注册的话，随意登录页面会提示报错。
 
 ![image](https://github.com/maopashui/TabIPTV/assets/38207700/fee2db6f-f88e-4038-8374-8da053e1f12c)
 
@@ -35,7 +35,7 @@ docker run -d -p 8000:8000 --name tabiptv maopashui/tabiptv:v1.0
 
 4.首次进入先添加路径，如iptv123456，如图
 
-<font color=red>偷懒没有写删除，所以这里建议只添加一个路径，每次需要变化就编辑</font>
+_偷懒没有写删除，所以这里建议只添加一个路径，每次需要变化就编辑_
 
 ![image](https://github.com/maopashui/TabIPTV/assets/38207700/a63720a3-87df-49bc-8bbd-7f37ee214caf)
 
@@ -43,7 +43,7 @@ docker run -d -p 8000:8000 --name tabiptv maopashui/tabiptv:v1.0
 
 首次需要一个个添加，比较麻烦
 
-<font color=red>当前编辑功能有点问题，下一版本修复</font>
+_当前编辑功能有问题，下一版本修复_
 
 ![image](https://github.com/maopashui/TabIPTV/assets/38207700/2c5f7b59-f756-4ab6-a2ea-087d5198b655)
 
@@ -51,7 +51,7 @@ docker run -d -p 8000:8000 --name tabiptv maopashui/tabiptv:v1.0
 
 txt接口，就访问路径:http://ip:8000/iptv123456/txt
 
-<font color=red>当前txt接口有问题，下一版本修复</font>
+_当前txt接口有问题，下一版本修复_
 
 m3u接口就访问路径：http://ip:8000/iptv123456/m3u
 
