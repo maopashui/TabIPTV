@@ -3,7 +3,7 @@
 可以直接docker安装
 ~~~shell
 docker pull maopashui/tabiptv
-docker run -d -p 8000:8000 --name tabiptv tabiptv:latest
+docker run -d -p 8000:8000 --name tabiptv maopashui/tabiptv:latest
 ~~~
 
 使用方式：
