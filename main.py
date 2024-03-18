@@ -4,13 +4,14 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
+import secrets
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from typing import Optional, List
 from datetime import datetime, timedelta, timezone
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 
-SECRET_KEY = "secret_key_str"  # 修改本参数只会影响token，不会影响密码
+SECRET_KEY = secrets.token_urlsafe(32)  # 修改本参数只会影响token，不会影响密码
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -105,7 +106,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url=None)
 app.mount("/statics", StaticFiles(directory="statics"), name="statics")
 
 templates = Jinja2Templates(directory="templates")
