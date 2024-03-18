@@ -12,4 +12,5 @@ docker run -d -p 8000:8000 --name tabiptv tabiptv:latest
 然后自行新增频道，如图示
 ![image](https://github.com/maopashui/TabIPTV/assets/38207700/d2f5b932-91b8-48ec-adb8-8df533cb76ef)
 
-最后想访问txt接口，就访问路径:http://ip:8000/iptv/txt,m3u接口就访问路径：http://ip:8000/iptv/m3u
+最后想访问txt接口，就访问路径:http://ip:8000/iptv/txt,
+m3u接口就访问路径：http://ip:8000/iptv/m3u
