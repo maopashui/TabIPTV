@@ -39,9 +39,9 @@ _首次需要`注册`用户，注册后则无法再新建用户了_，如果不�
 
 ![image](https://github.com/maopashui/TabIPTV/assets/38207700/9a6ba261-a45c-4360-9390-0b63c6583718)
 
-4.首次进入先添加路径，如iptv123456，如图
+4.首次进入先添加路径，如iptv_123456，如图
 
-_偷懒没有写删除，所以这里建议只添加一个路径，每次需要变化就编辑_
+_偷懒没有写删除，所以这里建议只添加一个路径，每次需要变化就编辑_ 230319调整为前缀`iptv_`开头+路径，所以访问接口时记得添加前缀
 
 ![image](https://github.com/maopashui/TabIPTV/assets/38207700/a63720a3-87df-49bc-8bbd-7f37ee214caf)
 
@@ -55,11 +55,11 @@ _当前编辑功能有问题，下一版本修复_ 已修复，时间240319 16:2
 
 6.访问接口
 
-txt接口，就访问路径:http://ip:8000/iptv123456/txt
+txt接口，就访问路径:http://ip:8000/iptv_123456/txt
 
 _当前txt接口有问题，下一版本修复_ 已修复，时间240319 16:26
 
-m3u接口就访问路径：http://ip:8000/iptv123456/m3u
+m3u接口就访问路径：http://ip:8000/iptv_123456/m3u
 
 ![image](https://github.com/maopashui/TabIPTV/assets/38207700/3de4980c-2ae4-4a46-bf66-0aad69f02ef4)
 
