@@ -4,6 +4,13 @@
 
 推荐txt接口使用DIYP播放器进行播放,PC则推荐m3u接口使用PotPlayer进行播放
 
+##### Python直接执行
+~~~shell
+git clone https://github.com/maopashui/TabIPTV.git
+cd TabIPTV
+pip install requirements.txt
+uvicron main:app
+~~~
 
 ##### Docker安装
 
@@ -42,7 +49,7 @@ _偷懒没有写删除，所以这里建议只添加一个路径，每次需要�
 
 首次需要一个个添加，比较麻烦
 
-_当前编辑功能有问题，下一版本修复_
+_当前编辑功能有问题，下一版本修复_ 已修复，时间240319 16:26
 
 ![image](https://github.com/maopashui/TabIPTV/assets/38207700/2c5f7b59-f756-4ab6-a2ea-087d5198b655)
 
@@ -50,7 +57,7 @@ _当前编辑功能有问题，下一版本修复_
 
 txt接口，就访问路径:http://ip:8000/iptv123456/txt
 
-_当前txt接口有问题，下一版本修复_
+_当前txt接口有问题，下一版本修复_ 已修复，时间240319 16:26
 
 m3u接口就访问路径：http://ip:8000/iptv123456/m3u
 
