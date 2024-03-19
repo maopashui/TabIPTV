@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Time    : 2024/03/19 11:20
+# Author  : maopashui
+# Vsersion : 1.1
+
 from fastapi import FastAPI, Depends, HTTPException, responses, Request, status, Path
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -47,6 +53,11 @@ class TAB_PATHBASE(SQLModel):
 class TAB_PATH(TAB_PATHBASE, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
+class TAB_PATH_READ(TAB_PATHBASE):
+    id: int
+
+class TAB_PATH_CREATE(TAB_PATHBASE):
+    pass
 
 class TAB_PATH_UPDATE(TAB_PATHBASE):
     iptv_path: Optional[str] = None
@@ -106,7 +117,8 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-app = FastAPI(docs_url=None, redoc_url=None)
+# app = FastAPI(docs_url=None, redoc_url=None)
+app = FastAPI()
 app.mount("/statics", StaticFiles(directory="statics"), name="statics")
 
 templates = Jinja2Templates(directory="templates")
@@ -184,7 +196,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
     return current_user
 
 
-@app.get("/{iptv_path}/{msg_type}", response_class=responses.PlainTextResponse)
+@app.get("/iptv_{iptv_path}/{msg_type}", response_class=responses.PlainTextResponse)
 async def get_iptvstr(*, session: Session = Depends(get_session), iptv_path: str = Path(...), msg_type: str):
     iptv_path1 = session.exec(select(TAB_PATH).where(TAB_PATH.iptv_path == iptv_path).limit(1)).first()
     print(iptv_path1)
@@ -230,8 +242,9 @@ async def get_iptvstr(*, session: Session = Depends(get_session), iptv_path: str
                 grouped_data[group_title].append(tvg_name)
 
         # 将每个分组内的名字拼接成一个字符串
+        nl = "\n"
         txt_str = '\n'.join(
-            [f"{group_title},#genre#\n{'+'.join(tvg_name)}" for group_title, tvg_name in grouped_data.items()])
+            [f"{group_title},#genre#{nl}{nl.join(tvg_name)}" for group_title, tvg_name in grouped_data.items()])
         return txt_str
 
 
@@ -266,12 +279,13 @@ async def read_tab(*, session: Session = Depends(get_session), current_user: Use
     if not current_user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     tab = session.get(Tab, tab_id)
+    print(tab)
     if not tab:
         raise HTTPException(status_code=404, detail="Tab not found")
     return tab
 
 
-@app.patch("/tabs/{tab_id}", response_model=TabRead)
+@app.post("/tabs/{tab_id}", response_model=TabRead)
 async def update_tab(*, session: Session = Depends(get_session), current_user: User = Depends(get_current_active_user),
                      tab_id: int, TabU: TabUpdate):
     if not current_user:
@@ -368,19 +382,26 @@ async def insert_user(*, session: Session = Depends(get_session), user: UserCrea
     return new_user
 
 
-@app.get("/tab_path", response_model=List[TAB_PATHBASE])
+@app.get("/tab_path", response_model=List[TAB_PATH_READ])
 async def get_tab_path(*, session: Session = Depends(get_session),
                        current_user: User = Depends(get_current_active_user)):
     if not current_user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     return session.exec(select(TAB_PATH)).all()
 
+@app.get("/tab_path/{id}", response_model=TAB_PATH_READ)
+async def get_tab_path_id(*, session: Session = Depends(get_session),
+                       current_user: User = Depends(get_current_active_user), id: int):
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    return session.get(TAB_PATH, id)
 
-@app.post("/tab_path", response_model=TAB_PATHBASE)
-async def insert_tab_path(*, session: Session = Depends(get_session), tab_path: TAB_PATHBASE,
+@app.post("/tab_path", response_model=TAB_PATH_READ)
+async def insert_tab_path(*, session: Session = Depends(get_session), tab_path: TAB_PATH_CREATE,
                           current_user: User = Depends(get_current_active_user)):
     if not current_user:
         raise HTTPException(status_code=401, detail="Not authenticated")
+
     tab_path = TAB_PATH.model_validate(tab_path)
     session.add(tab_path)
     session.commit()
@@ -388,7 +409,7 @@ async def insert_tab_path(*, session: Session = Depends(get_session), tab_path: 
     return tab_path
 
 
-@app.patch("/tab_path/{id}", response_model=TAB_PATHBASE)
+@app.post("/tab_path/{id}", response_model=TAB_PATH_READ)
 async def update_tab_path(*, session: Session = Depends(get_session), tab_path_u: TAB_PATH_UPDATE, id: int,
                           current_user: User = Depends(get_current_active_user)):
     if not current_user:
