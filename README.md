@@ -15,8 +15,8 @@ uvicron main:app
 ##### Docker安装
 
 ~~~shell
-docker pull maopashui/tabiptv:v1.0
-docker run -d -p 8000:8000 --name tabiptv maopashui/tabiptv:v1.0
+docker pull maopashui/tabiptv:v1.1
+docker run -d -p 8000:8000 --name tabiptv maopashui/tabiptv:v1.1
 ~~~
 
 以下截图为wsl环境执行截图：
