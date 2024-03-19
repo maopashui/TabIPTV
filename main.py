@@ -117,8 +117,8 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-# app = FastAPI(docs_url=None, redoc_url=None)
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url=None)
+# app = FastAPI()
 app.mount("/statics", StaticFiles(directory="statics"), name="statics")
 
 templates = Jinja2Templates(directory="templates")
